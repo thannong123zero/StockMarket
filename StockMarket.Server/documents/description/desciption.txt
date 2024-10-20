@@ -1,0 +1,12 @@
+I want to build a stock market application.
+Technologies:
++ Back-end: ASP.net core application
++ Front-end: Angular 18
++ FrameWork: Entity FrameWork
++ Database: SQL server
+
+Feature:
+1. Login 
+2. LogOut
+3. Buy stock
+4. Sale stock
