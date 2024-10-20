@@ -28,9 +28,9 @@ namespace StockMarket.Server.Controllers
             return Ok("CompanyController.Get");
         }
         [HttpPost("Create")]
-        public async Task<IActionResult> Create([FromForm] CompanyViewModel model)
+        public async Task<IActionResult> Create([FromBody] CompanyViewModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -38,8 +38,9 @@ namespace StockMarket.Server.Controllers
             return Ok("CompanyController.Add");
         }
         [HttpPut("Update")]
-        public IActionResult Update()
+        public IActionResult Update([FromBody] CompanyViewModel model)
         {
+            _companyHelper.Update(model);
             return Ok("CompanyController.Update");
         }
         [HttpDelete("Delete/{id}")]

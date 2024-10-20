@@ -2,7 +2,9 @@
 
 namespace StockMarket.Server._Convergence.BusinessLogic.IHelper
 {
-    public interface IStockHistoryHelper : IBaseHelper<StockHistoryViewModel>
+    public interface IStockHistoryHelper 
     {
+        public Task<IEnumerable<StockHistoryViewModel>> GetAllAsync();
+        public Task FetchData();
     }
 }

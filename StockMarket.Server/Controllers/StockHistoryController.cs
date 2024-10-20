@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StockMarket.Server._Convergence.BusinessLogic.Helper;
+using StockMarket.Server._Convergence.BusinessLogic.IHelper;
+using StockMarket.Server._Convergence.Services.FetchDataServiceAPIs;
 using StockMarket.Server.Models;
+using System;
 
 namespace StockMarket.Server.Controllers
 {
@@ -9,38 +12,43 @@ namespace StockMarket.Server.Controllers
     [ApiController]
     public class StockHistoryController : ControllerBase
     {
-        private readonly StockHistoryHelper _stockHistoryHelper;
-        public StockHistoryController(StockHistoryHelper stockHistoryHelper)
+        private readonly IStockHistoryHelper _stockHistoryHelper;
+        public StockHistoryController(IStockHistoryHelper stockHistoryHelper)
         {
             _stockHistoryHelper = stockHistoryHelper;
         }
 
         [HttpGet("GetAll")]
-        public IActionResult Get()
+        public async Task<IActionResult> GetAll()
         {
-            var data = _stockHistoryHelper.GetAll();   
+            var data = await _stockHistoryHelper.GetAllAsync();
             return Ok(data);
         }
-
-        [HttpGet("Get/{id}")]
-        public IActionResult Get(int id)
+        [HttpGet("FetchData")]
+        public async Task<IActionResult> FetchData()
         {
-            return Ok("CompanyController.Get");
+            await _stockHistoryHelper.GetAllAsync();
+            return Ok();
         }
-        [HttpPost("Create")]
-        public IActionResult Create()
-        {
-            return Ok("CompanyController.Add");
-        }
-        [HttpPut("Update")]
-        public IActionResult Update()
-        {
-            return Ok("CompanyController.Update");
-        }
-        [HttpDelete("Delete/{id}")]
-        public IActionResult Delete(int id)
-        {
-            return Ok("CompanyController.Delete");
-        }
+        //[HttpGet("Get/{id}")]
+        //public IActionResult Get(int id)
+        //{
+        //    return Ok("CompanyController.Get");
+        //}
+        //[HttpPost("Create")]
+        //public IActionResult Create()
+        //{
+        //    return Ok("CompanyController.Add");
+        //}
+        //[HttpPut("Update")]
+        //public IActionResult Update()
+        //{
+        //    return Ok("CompanyController.Update");
+        //}
+        //[HttpDelete("Delete/{id}")]
+        //public IActionResult Delete(int id)
+        //{
+        //    return Ok("CompanyController.Delete");
+        //}
     }
 }

@@ -53,12 +53,14 @@ namespace StockMarket.Server._Convergence.BusinessLogic.Helper
 
         public CompanyViewModel GetById(int id)
         {
-            throw new NotImplementedException();
+            var data = _unitOfWork.CompanyRepository.GetById(id);
+            return _mapper.Map<CompanyViewModel>(data);
         }
 
-        public Task<CompanyViewModel> GetByIdAsync(int id)
+        public async Task<CompanyViewModel> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var data = await _unitOfWork.CompanyRepository.GetByIdAsync(id);
+            return _mapper.Map<CompanyViewModel>(data);
         }
 
         public void Restore(int id)
@@ -83,12 +85,26 @@ namespace StockMarket.Server._Convergence.BusinessLogic.Helper
 
         public void Update(CompanyViewModel model)
         {
-            throw new NotImplementedException();
+            var data = _unitOfWork.CompanyRepository.GetById(model.Id);
+            if(data == null)
+            {
+                throw new Exception("Company not found");
+            }
+            data.Name = model.Name;
+            data.Symbol = model.Symbol;
+            _unitOfWork.SaveChanges();
         }
 
-        public Task UpdateAsync(CompanyViewModel model)
+        public async Task UpdateAsync(CompanyViewModel model)
         {
-            throw new NotImplementedException();
+            var data = await _unitOfWork.CompanyRepository.GetByIdAsync(model.Id);
+            if(data == null)
+            {
+                throw new Exception("Company not found");
+            }
+            data.Name = model.Name;
+            data.Symbol = model.Symbol;
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

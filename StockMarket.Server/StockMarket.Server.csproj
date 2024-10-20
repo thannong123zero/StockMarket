@@ -34,8 +34,4 @@
     </ProjectReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="_Convergence\Services\FetchDataServiceAPIs\" />
-  </ItemGroup>
-
 </Project>

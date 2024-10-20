@@ -12,8 +12,8 @@ namespace StockMarket.Server._Convergence.Services
         {
             services.AddScoped<ApplicationDbContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<ICompanyHelper, CompanyHelper>();
-            services.AddScoped<IStockHistoryHelper, StockHistoryHelper>();
+            services.AddTransient<ICompanyHelper, CompanyHelper>();
+            services.AddTransient<IStockHistoryHelper, StockHistoryHelper>();
 
             return services;
         }
