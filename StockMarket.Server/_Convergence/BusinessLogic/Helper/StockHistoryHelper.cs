@@ -4,6 +4,7 @@ using Microsoft.Identity.Client;
 using Newtonsoft.Json;
 using StockMarket.Server._Convergence.BusinessLogic.IHelper;
 using StockMarket.Server._Convergence.DataAccess;
+using StockMarket.Server._Convergence.DataAccess.DTOs;
 using StockMarket.Server.Models;
 
 namespace StockMarket.Server._Convergence.BusinessLogic.Helper
@@ -19,12 +20,16 @@ namespace StockMarket.Server._Convergence.BusinessLogic.Helper
         }
         public void Create(StockHistoryViewModel model)
         {
-            throw new NotImplementedException();
+            var data = _mapper.Map<StockHistoryDTO>(model);
+            _unitOfWork.StockHistoryRepository.Create(data);
+            _unitOfWork.SaveChanges();
         }
 
-        public Task CreateAsync(StockHistoryViewModel model)
+        public async Task CreateAsync(StockHistoryViewModel model)
         {
-            throw new NotImplementedException();
+            var data = _mapper.Map<StockHistoryDTO>(model);
+           await _unitOfWork.StockHistoryRepository.CreateAsync(data);
+           await _unitOfWork.SaveChangesAsync();
         }
 
         public void Delete(int id)
@@ -39,22 +44,26 @@ namespace StockMarket.Server._Convergence.BusinessLogic.Helper
 
         public IEnumerable<StockHistoryViewModel> GetAll()
         {
-            throw new NotImplementedException();
+            var data = _unitOfWork.StockHistoryRepository.GetAll();
+            return _mapper.Map<IEnumerable<StockHistoryViewModel>>(data);
         }
 
-        public Task<IEnumerable<StockHistoryViewModel>> GetAllAsync()
+        public async Task<IEnumerable<StockHistoryViewModel>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var data = await _unitOfWork.StockHistoryRepository.GetAllAsync();
+            return _mapper.Map<IEnumerable<StockHistoryViewModel>>(data);
         }
 
         public StockHistoryViewModel GetById(int id)
         {
-            throw new NotImplementedException();
+            var data = _unitOfWork.StockHistoryRepository.GetById(id);
+            return _mapper.Map<StockHistoryViewModel>(data);
         }
 
-        public Task<StockHistoryViewModel> GetByIdAsync(int id)
+        public async Task<StockHistoryViewModel> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var data = await _unitOfWork.StockHistoryRepository.GetByIdAsync(id);
+            return _mapper.Map<StockHistoryViewModel>(data);
         }
 
         public void Restore(int id)

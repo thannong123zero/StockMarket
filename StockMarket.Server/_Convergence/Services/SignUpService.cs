@@ -10,7 +10,8 @@ namespace StockMarket.Server._Convergence.Services
     {
         public static IServiceCollection SignUp(this IServiceCollection services)
         {
-            services.AddSingleton<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ApplicationDbContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICompanyHelper, CompanyHelper>();
             services.AddScoped<IStockHistoryHelper, StockHistoryHelper>();
 

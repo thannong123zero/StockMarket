@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using StockMarket.Server._Convergence.BusinessLogic.IHelper;
 using StockMarket.Server._Convergence.DataAccess;
+using StockMarket.Server._Convergence.DataAccess.DTOs;
 using StockMarket.Server.Models;
 
 namespace StockMarket.Server._Convergence.BusinessLogic.Helper
@@ -16,12 +17,16 @@ namespace StockMarket.Server._Convergence.BusinessLogic.Helper
         }
         public void Create(CompanyViewModel model)
         {
-            throw new NotImplementedException();
+            var data = _mapper.Map<CompanyDTO>(model);
+            _unitOfWork.CompanyRepository.Create(data);
+            _unitOfWork.SaveChanges();
         }
 
-        public Task CreateAsync(CompanyViewModel model)
+        public async Task CreateAsync(CompanyViewModel model)
         {
-            throw new NotImplementedException();
+            var data = _mapper.Map<CompanyDTO>(model);
+            await _unitOfWork.CompanyRepository.CreateAsync(data);
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public void Delete(int id)
@@ -36,12 +41,14 @@ namespace StockMarket.Server._Convergence.BusinessLogic.Helper
 
         public IEnumerable<CompanyViewModel> GetAll()
         {
-            throw new NotImplementedException();
+            var data = _unitOfWork.CompanyRepository.GetAll();
+            return _mapper.Map<IEnumerable<CompanyViewModel>>(data);
         }
 
-        public Task<IEnumerable<CompanyViewModel>> GetAllAsync()
+        public async Task<IEnumerable<CompanyViewModel>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var data = await _unitOfWork.CompanyRepository.GetAllAsync();
+            return _mapper.Map<IEnumerable<CompanyViewModel>>(data);
         }
 
         public CompanyViewModel GetById(int id)

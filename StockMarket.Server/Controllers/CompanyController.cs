@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StockMarket.Server._Convergence.BusinessLogic.IHelper;
+using StockMarket.Server.Models;
 
 namespace StockMarket.Server.Controllers
 {
@@ -7,10 +9,17 @@ namespace StockMarket.Server.Controllers
     [ApiController]
     public class CompanyController : ControllerBase
     {
-        [HttpGet("GetAll")]
-        public IActionResult GetAll()
+        private readonly ICompanyHelper _companyHelper;
+        public CompanyController(ICompanyHelper companyHelper)
         {
-            return Ok("CompanyController.Get");
+            _companyHelper = companyHelper;
+        }
+
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll()
+        {
+            var data = await _companyHelper.GetAllAsync();
+            return Ok(data);
         }
 
         [HttpGet("Get/{id}")]
@@ -19,8 +28,13 @@ namespace StockMarket.Server.Controllers
             return Ok("CompanyController.Get");
         }
         [HttpPost("Create")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create([FromForm] CompanyViewModel model)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            await _companyHelper.CreateAsync(model);
             return Ok("CompanyController.Add");
         }
         [HttpPut("Update")]
