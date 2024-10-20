@@ -34,8 +34,7 @@ export class CandleChartComponent implements OnInit, OnDestroy {
       data => {
         if(data)
          {
-          console.log(typeof data);
-
+          this.stockHistory = data;
          }
       },
       error => {
@@ -85,11 +84,11 @@ export class CandleChartComponent implements OnInit, OnDestroy {
         let valueSeries = mainPanel.series.push(am5xy.CandlestickSeries.new(this.root, {
           name: "MSFT",
           clustered: false,
-          valueXField: "Date",
-          valueYField: "Close",
-          highValueYField: "High",
-          lowValueYField: "Low",
-          openValueYField: "Open",
+          valueXField: "date",
+          valueYField: "close",
+          highValueYField: "high",
+          lowValueYField: "low",
+          openValueYField: "open",
           calculateAggregates: true,
           xAxis: dateAxis,
           yAxis: valueAxis,
@@ -136,8 +135,8 @@ export class CandleChartComponent implements OnInit, OnDestroy {
         let volumeSeries = volumePanel.series.push(am5xy.ColumnSeries.new(this.root, {
           name: "Volume",
           clustered: false,
-          valueXField: "Date",
-          valueYField: "Volume",
+          valueXField: "date",
+          valueYField: "volume",
           xAxis: volumeDateAxis,
           yAxis: volumeValueAxis,
           legendValueText: "[bold]{valueY.formatNumber('#,###.0a')}[/]"
@@ -200,8 +199,8 @@ export class CandleChartComponent implements OnInit, OnDestroy {
         }));
     
         let sbSeries = scrollbar.chart.series.push(am5xy.LineSeries.new(this.root, {
-          valueYField: "Close",
-          valueXField: "Date",
+          valueYField: "close",
+          valueXField: "date",
           xAxis: sbDateAxis,
           yAxis: sbValueAxis
         }));

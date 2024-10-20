@@ -35,8 +35,7 @@
 
   <ItemGroup>
     <Folder Include="_Convergence\BusinessLogic\IHelper\" />
-    <Folder Include="_Convergence\Common\" />
-    <Folder Include="_Convergence\DataAccess\" />
+    <Folder Include="_Convergence\Services\FetchDataServiceAPIs\" />
   </ItemGroup>
 
 </Project>

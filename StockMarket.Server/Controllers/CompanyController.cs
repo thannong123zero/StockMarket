@@ -1,25 +1,16 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using StockMarket.Server._Convergence.BusinessLogic.Helper;
-using StockMarket.Server.Models;
 
 namespace StockMarket.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StockHistoryController : ControllerBase
+    public class CompanyController : ControllerBase
     {
-        private readonly StockHistoryHelper _stockHistoryHelper;
-        public StockHistoryController(StockHistoryHelper stockHistoryHelper)
-        {
-            _stockHistoryHelper = stockHistoryHelper;
-        }
-
         [HttpGet("GetAll")]
-        public IActionResult Get()
+        public IActionResult GetAll()
         {
-            var data = _stockHistoryHelper.GetStockHistory();   
-            return Ok(data);
+            return Ok("CompanyController.Get");
         }
 
         [HttpGet("Get/{id}")]
