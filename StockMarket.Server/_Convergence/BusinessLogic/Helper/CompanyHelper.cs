@@ -1,28 +1,25 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.SignalR.Protocol;
-using Microsoft.Identity.Client;
-using Newtonsoft.Json;
 using StockMarket.Server._Convergence.BusinessLogic.IHelper;
 using StockMarket.Server._Convergence.DataAccess;
 using StockMarket.Server.Models;
 
 namespace StockMarket.Server._Convergence.BusinessLogic.Helper
 {
-    public class StockHistoryHelper : IStockHistoryHelper
+    public class CompanyHelper : ICompanyHelper
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public StockHistoryHelper(IUnitOfWork unitOfWork, Mapper mapper)
+        public CompanyHelper(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public void Create(StockHistoryViewModel model)
+        public void Create(CompanyViewModel model)
         {
             throw new NotImplementedException();
         }
 
-        public Task CreateAsync(StockHistoryViewModel model)
+        public Task CreateAsync(CompanyViewModel model)
         {
             throw new NotImplementedException();
         }
@@ -37,22 +34,22 @@ namespace StockMarket.Server._Convergence.BusinessLogic.Helper
             throw new NotImplementedException();
         }
 
-        public IEnumerable<StockHistoryViewModel> GetAll()
+        public IEnumerable<CompanyViewModel> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<StockHistoryViewModel>> GetAllAsync()
+        public Task<IEnumerable<CompanyViewModel>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public StockHistoryViewModel GetById(int id)
+        public CompanyViewModel GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<StockHistoryViewModel> GetByIdAsync(int id)
+        public Task<CompanyViewModel> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
@@ -77,12 +74,12 @@ namespace StockMarket.Server._Convergence.BusinessLogic.Helper
             throw new NotImplementedException();
         }
 
-        public void Update(StockHistoryViewModel model)
+        public void Update(CompanyViewModel model)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(StockHistoryViewModel model)
+        public Task UpdateAsync(CompanyViewModel model)
         {
             throw new NotImplementedException();
         }

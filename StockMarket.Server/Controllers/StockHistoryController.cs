@@ -18,7 +18,7 @@ namespace StockMarket.Server.Controllers
         [HttpGet("GetAll")]
         public IActionResult Get()
         {
-            var data = _stockHistoryHelper.GetStockHistory();   
+            var data = _stockHistoryHelper.GetAll();   
             return Ok(data);
         }
 
