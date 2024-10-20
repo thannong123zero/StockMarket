@@ -6,5 +6,8 @@ namespace StockMarket.Server._Convergence.BusinessLogic.IHelper
     {
         public Task<IEnumerable<StockHistoryViewModel>> GetAllAsync();
         public Task FetchData();
-    }
+        public List<StockHistoryViewModel> GetStockHistory()
+
+
+;    }
 }

@@ -24,10 +24,16 @@ namespace StockMarket.Server.Controllers
             var data = await _stockHistoryHelper.GetAllAsync();
             return Ok(data);
         }
+        [HttpGet("GetAll1")]
+        public IActionResult GetAll1()
+        {
+            var data =  _stockHistoryHelper.GetStockHistory();
+            return Ok(data);
+        }
         [HttpGet("FetchData")]
         public async Task<IActionResult> FetchData()
         {
-            await _stockHistoryHelper.GetAllAsync();
+            await _stockHistoryHelper.FetchData();
             return Ok();
         }
         //[HttpGet("Get/{id}")]

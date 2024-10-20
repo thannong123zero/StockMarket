@@ -30,11 +30,26 @@ export class CandleChartComponent implements OnInit, OnDestroy {
   }
 
   GetData(): Promise<void> {
-    return this.http.get<StockHistoryViewModel[]>('/api/stockhistory').toPromise().then(
+    // this.http.get<StockHistoryViewModel[]>('/api/stockhistory/getall').toPromise().then(
+    //   data => {
+    //     if(data)
+    //      {
+    //       data;
+    //       console.log("DCM");
+    //       console.log(data);
+    //      }
+    //   },
+    //   error => {
+    //     console.error(error);
+    //   }
+    // );
+
+    return this.http.get<StockHistoryViewModel[]>('/api/stockhistory/getall').toPromise().then(
       data => {
         if(data)
          {
           this.stockHistory = data;
+          console.log(this.stockHistory);
          }
       },
       error => {
@@ -44,7 +59,7 @@ export class CandleChartComponent implements OnInit, OnDestroy {
   }
 
   CreateChart(): void{
-    console.log(this.stockHistory);
+    //console.log(this.stockHistory);
         // Create root element
         this.root = am5.Root.new("chartdiv");
 
