@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ChartComponent } from './chart/chart.component';
 import { CandleChartComponent } from './candle-chart/candle-chart.component';
+import { LoginComponent } from './login/login.component';
 
 interface WeatherForecast {
   date: string;
@@ -15,7 +16,7 @@ interface WeatherForecast {
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [CandleChartComponent]
+  imports: [LoginComponent]
 })
 export class AppComponent implements OnInit {
   public forecasts: WeatherForecast[] = [];
