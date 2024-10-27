@@ -16,7 +16,7 @@ interface WeatherForecast {
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [LoginComponent]
+  imports: [LoginComponent,CandleChartComponent]
 })
 export class AppComponent implements OnInit {
   public forecasts: WeatherForecast[] = [];

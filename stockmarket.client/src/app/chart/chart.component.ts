@@ -18,7 +18,6 @@ export class ChartComponent implements AfterViewInit, OnDestroy {
     // https://www.amcharts.com/docs/v5/getting-started/#Root_element
     this.root = am5.Root.new("chartdiv");
 
-
     // Set themes
     // https://www.amcharts.com/docs/v5/concepts/themes/
     this.root.setThemes([
@@ -149,19 +148,24 @@ export class ChartComponent implements AfterViewInit, OnDestroy {
     // Add legend to axis header
     // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/axis-headers/
     // https://www.amcharts.com/docs/v5/charts/xy-chart/legend-xy-series/
-    const valueLegend = valueAxis.axisHeader.children.push(
-      am5.Legend.new(this.root, {
-        useDefaultMarker: true
-      })
-    );
-    valueLegend.data.setAll([valueSeries1]);
+    // const valueLegend = valueAxis.axisHeader.children.push(
+    //   am5.Legend.new(this.root, {
+    //     useDefaultMarker: true
+    //   })
+    // );
+    // valueLegend.data.setAll([valueSeries1]);
 
-    const volumeLegend = volumeAxis.axisHeader.children.push(
-      am5.Legend.new(this.root, {
-        useDefaultMarker: true
-      })
-    );
-    volumeLegend.data.setAll([volumeSeries]);
+    // const volumeLegend = volumeAxis.axisHeader.children.push(
+    //   am5.Legend.new(this.root, {
+    //     useDefaultMarker: true
+    //   })
+    // );
+    // volumeLegend.data.setAll([volumeSeries]);
+
+
+
+
+
 
 
     // Stack axes vertically
