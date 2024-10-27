@@ -15,12 +15,13 @@ import { any } from '@amcharts/amcharts5/.internal/core/util/Array';
 })
 export class CandleChartComponent implements OnInit, OnDestroy {
   private root!: am5.Root;
+  public showChart: boolean = true;
   public stockHistory: StockHistoryViewModel[] = [];
   constructor(private http: HttpClient) { }
 
 
   async ngOnInit(): Promise<void> {
-    await this.GetData();
+    await this.GetData('DCM');
     this.CreateChart();
   }
 
@@ -30,31 +31,25 @@ export class CandleChartComponent implements OnInit, OnDestroy {
     }
   }
 
-  GetData(): Promise<void> {
-    // this.http.get<StockHistoryViewModel[]>('/api/stockhistory/getall').toPromise().then(
-    //   data => {
-    //     if(data)
-    //      {
-    //       data;
-    //       console.log("DCM");
-    //       console.log(data);
-    //      }
-    //   },
-    //   error => {
-    //     console.error(error);
-    //   }
-    // );
-
-    return this.http.get<StockHistoryViewModel[]>('/api/stockhistory/getall').toPromise().then(
+  GetData(symbol:string): Promise<void> {
+    let url = '/api/stockhistory/getall?symbol=' + symbol;
+    return this.http.get<StockHistoryViewModel[]>(url).toPromise().then(
       data => {
         if(data)
          {
           this.stockHistory = data;
-          console.log(this.stockHistory);
          }
+         if(this.stockHistory.length == 0)
+         {
+           this.showChart = false;
+         }else{
+           this.showChart = true;
+         }
+        
       },
       error => {
         console.error(error);
+        this.showChart = false;
       }
     );
   }
@@ -326,6 +321,21 @@ export class CandleChartComponent implements OnInit, OnDestroy {
         volumeSeries.data.setAll(this.stockHistory);
         sbSeries.data.setAll(this.stockHistory);
 
+  }
+
+  async selectSymbol(event: any): Promise<void> {
+    let symbol = event.target.value;
+
+    // Dispose the existing chart to clear it
+    if (this.root) {
+      this.root.dispose();
+    }
+
+    // Fetch new data for the selected symbol
+    await this.GetData(symbol);
+
+    // Recreate the chart with the new data
+    this.CreateChart();
   }
 }
 

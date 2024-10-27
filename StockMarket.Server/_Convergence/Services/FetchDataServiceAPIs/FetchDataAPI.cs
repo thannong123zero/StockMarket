@@ -5,9 +5,9 @@ namespace StockMarket.Server._Convergence.Services.FetchDataServiceAPIs
 {
     public class FetchDataAPI
     {
-        public async Task<FetchStockHistoryViewModel> FetchData()
+        public async Task<FetchStockHistoryViewModel> FetchData(string symbol, string from, string to)
         {
-            string url = "https://dchart-api.vndirect.com.vn/dchart/history?resolution=1D&symbol=DCM&from=1427734800&to=1729435858";
+            string url = $"https://dchart-api.vndirect.com.vn/dchart/history?resolution=1D&symbol={symbol}&from={from}&to={to}";
             using (HttpClient httpClient = new HttpClient())
             {
                 HttpResponseMessage response = await httpClient.GetAsync(url);
@@ -17,7 +17,6 @@ namespace StockMarket.Server._Convergence.Services.FetchDataServiceAPIs
                     FetchStockHistoryViewModel fetchStockHistoryViewModel = JsonConvert.DeserializeObject<FetchStockHistoryViewModel>(data);
                     return fetchStockHistoryViewModel;
                 }
-
             }
             return null;
         }

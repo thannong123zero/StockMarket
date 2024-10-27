@@ -1,2 +1,13 @@
-<div id="chartcontrols"></div>
-<div id="chartdiv" style="width: 100%; height: 95vh;"></div>
+<div id="chartcontrols">
+  <select class="am5stock am5stock-control am5stock-control-button am5stock-control-dropdown me-2" (change)="selectSymbol($event)">
+    <option value="DCM">DCM</option>
+    <option value="DPM">DPM</option>
+    <option value="PC1">PC1</option>
+    <option value="NVL">NVL</option>
+  </select>
+</div>
+@if(!showChart){
+  <h1 class="text-center">No value!</h1>
+}
+  <div id="chartdiv" class="{{showChart ? '':'d-none'}}" style="width: 100%; height: 95vh;"></div>
+

@@ -19,21 +19,17 @@ namespace StockMarket.Server.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(string symbol)
         {
-            var data = await _stockHistoryHelper.GetAllAsync();
-            return Ok(data);
-        }
-        [HttpGet("GetAll1")]
-        public IActionResult GetAll1()
-        {
-            var data =  _stockHistoryHelper.GetStockHistory();
+            var data = await _stockHistoryHelper.GetAllAsync(symbol);
             return Ok(data);
         }
         [HttpGet("FetchData")]
-        public async Task<IActionResult> FetchData()
+        public async Task<IActionResult> FetchData(string symbol, DateTime from, DateTime to)
         {
-            await _stockHistoryHelper.FetchData();
+            bool check = await _stockHistoryHelper.FetchData(symbol,from,to);
+            if (!check)
+                return BadRequest();
             return Ok();
         }
         //[HttpGet("Get/{id}")]
