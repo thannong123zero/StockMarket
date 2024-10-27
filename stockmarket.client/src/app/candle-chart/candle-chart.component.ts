@@ -5,6 +5,7 @@ import * as am5stock from "@amcharts/amcharts5/stock";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import { HttpClient } from '@angular/common/http';
 import { publishFacade } from '@angular/compiler';
+import { any } from '@amcharts/amcharts5/.internal/core/util/Array';
 
 @Component({
   selector: 'app-candle-chart',
@@ -110,7 +111,15 @@ export class CandleChartComponent implements OnInit, OnDestroy {
           legendValueText: "open: [bold]{openValueY}[/] high: [bold]{highValueY}[/] low: [bold]{lowValueY}[/] close: [bold]{valueY}[/]",
           legendRangeValueText: ""
         }));
-    
+
+        //set default period 6 months
+        var periodSelector = am5stock.PeriodSelector.new(this.root, {
+          stockChart: stockChart
+        });
+        valueSeries.events.once("datavalidated", function() {
+          periodSelector.selectPeriod({ timeUnit: "month", count: 6 });
+        });
+
         // Set main value series
         stockChart.set("stockSeries", valueSeries);
     
@@ -287,14 +296,31 @@ export class CandleChartComponent implements OnInit, OnDestroy {
           controls: [
             am5stock.IndicatorControl.new(this.root, { stockChart: stockChart, legend: valueLegend }),
             am5stock.DateRangeSelector.new(this.root, { stockChart: stockChart }),
-            am5stock.PeriodSelector.new(this.root, { stockChart: stockChart }),
+            am5stock.PeriodSelector.new(this.root, { stockChart: stockChart}),
             seriesSwitcher,
             am5stock.DrawingControl.new(this.root, { stockChart: stockChart }),
             am5stock.ResetControl.new(this.root, { stockChart: stockChart }),
             am5stock.SettingsControl.new(this.root, { stockChart: stockChart })
           ]
         });
-    
+        // Add bollinger bands
+        stockChart.indicators.push(am5stock.BollingerBands.new(this.root, {
+          stockChart: stockChart,
+          stockSeries: valueSeries,
+          legend: valueLegend,
+          type: "simple"
+        }));
+
+      // Add Volume Profile indicator
+      stockChart.indicators.push(am5stock.VolumeProfile.new(this.root, {
+        stockChart: stockChart,
+        stockSeries: valueSeries,
+        volumeSeries: volumeSeries,
+        legend: valueLegend
+      }));
+        // add indicator
+      stockChart.indicators.push(am5stock.RelativeStrengthIndex.new(this.root, { stockChart: stockChart, stockSeries: valueSeries }));
+
         // Set data to all series
         valueSeries.data.setAll(this.stockHistory);
         volumeSeries.data.setAll(this.stockHistory);
