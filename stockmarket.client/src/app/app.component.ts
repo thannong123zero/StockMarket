@@ -1,31 +1,58 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { ChartComponent } from './chart/chart.component';
-import { CandleChartComponent } from './candle-chart/candle-chart.component';
-import { LoginComponent } from './login/login.component';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { delay, filter, map, tap } from 'rxjs/operators';
 
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
-}
+import { ColorModeService } from '@coreui/angular';
+import { IconSetService } from '@coreui/icons-angular';
+import { iconSubset } from './icons/icon-subset';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  template: '<router-outlet />',
   standalone: true,
-  imports: [LoginComponent,CandleChartComponent]
+  imports: [RouterOutlet]
 })
 export class AppComponent implements OnInit {
-  public forecasts: WeatherForecast[] = [];
+  title = 'CoreUI Angular Admin Template';
 
-  constructor(private http: HttpClient) {}
+  readonly #destroyRef: DestroyRef = inject(DestroyRef);
+  readonly #activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+  readonly #router = inject(Router);
+  readonly #titleService = inject(Title);
 
-  ngOnInit() {
+  readonly #colorModeService = inject(ColorModeService);
+  readonly #iconSetService = inject(IconSetService);
 
+  constructor() {
+    this.#titleService.setTitle(this.title);
+    // iconSet singleton
+    this.#iconSetService.icons = { ...iconSubset };
+    this.#colorModeService.localStorageItemName.set('coreui-free-angular-admin-template-theme-default');
+    this.#colorModeService.eventName.set('ColorSchemeChange');
   }
 
-  title = 'stockmarket.client';
+  ngOnInit(): void {
+
+    this.#router.events.pipe(
+        takeUntilDestroyed(this.#destroyRef)
+      ).subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+    });
+
+    this.#activatedRoute.queryParams
+      .pipe(
+        delay(1),
+        map(params => <string>params['theme']?.match(/^[A-Za-z0-9\s]+/)?.[0]),
+        filter(theme => ['dark', 'light', 'auto'].includes(theme)),
+        tap(theme => {
+          this.#colorModeService.colorMode.set(theme);
+        }),
+        takeUntilDestroyed(this.#destroyRef)
+      )
+      .subscribe();
+  }
 }

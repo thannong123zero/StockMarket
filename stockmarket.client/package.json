@@ -1,6 +1,11 @@
 {
   "name": "stockmarket.client",
   "version": "0.0.0",
+  "config": {
+    "theme": "default",
+    "coreui_library_short_version": "5.2",
+    "coreui_library_docs_url": "https://coreui.io/angular/docs/"
+  },
   "scripts": {
     "ng": "ng",
     "start": "run-script-os",
@@ -22,7 +27,14 @@
     "@angular/platform-browser": "^18.1.0",
     "@angular/platform-browser-dynamic": "^18.1.0",
     "@angular/router": "^18.1.0",
+    "@coreui/angular": "^5.2.22",
+    "@coreui/angular-chartjs": "^5.2.22",
+    "@coreui/chartjs": "^4.0.0",
+    "@coreui/coreui": "^5.2.0",
+    "@coreui/icons": "^3.0.1",
+    "@coreui/utils": "^2.0.2",
     "jest-editor-support": "*",
+    "ngx-scrollbar": "^16.0.0",
     "run-script-os": "*",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
