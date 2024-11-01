@@ -14,6 +14,7 @@ import { iconSubset } from './icons/icon-subset';
   standalone: true,
   imports: [RouterOutlet]
 })
+
 export class AppComponent implements OnInit {
   title = 'CoreUI Angular Admin Template';
 
