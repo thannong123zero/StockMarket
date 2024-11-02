@@ -12,12 +12,13 @@ import { RowComponent, ColComponent, TextColorDirective, CardComponent, CardHead
 })
 export class ListGroupsComponent {
 
-  constructor(
-    private formBuilder: UntypedFormBuilder
-  ) { }
+
+  constructor(private formBuilder: UntypedFormBuilder) {
+  }
 
   readonly breakpoints: (string | boolean)[] = [true, 'sm', 'md', 'lg', 'xl', 'xxl'];
   readonly colors: string[] = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
+
 
   readonly checkBoxes = this.formBuilder.group({
     one: false,

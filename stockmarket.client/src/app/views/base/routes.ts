@@ -47,13 +47,13 @@ export const routes: Routes = [
           title: 'Collapse'
         }
       },
-      {
-        path: 'list-group',
-        loadComponent: () => import('./list-groups/list-groups.component').then(m => m.ListGroupsComponent),
-        data: {
-          title: 'List Group'
-        }
-      },
+      // {
+      //   path: 'list-group',
+      //   loadComponent: () => import('./list-groups/list-groups.component').then(m => m.ListGroupsComponent),
+      //   data: {
+      //     title: 'List Group'
+      //   }
+      // },
       {
         path: 'navs',
         loadComponent: () => import('./navs/navs.component').then(m => m.NavsComponent),

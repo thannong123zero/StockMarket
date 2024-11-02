@@ -8,7 +8,7 @@ import {
   ScaleOptions,
   TooltipLabelStyle
 } from 'chart.js';
-import { DeepPartial } from 'chart.js/dist/types/utils';
+//import { DeepPartial } from 'chart.js/dist/types/utils';
 import { getStyle, hexToRgba } from '@coreui/utils';
 
 export interface IChartProps {
@@ -128,22 +128,22 @@ export class DashboardChartsData {
       }
     ];
 
-    const plugins: DeepPartial<PluginOptionsByType<any>> = {
-      legend: {
-        display: false
-      },
-      tooltip: {
-        callbacks: {
-          labelColor: (context : any) => ({ backgroundColor: context.dataset.borderColor } as TooltipLabelStyle)
-        }
-      }
-    };
+    // const plugins: DeepPartial<PluginOptionsByType<any>> = {
+    //   legend: {
+    //     display: false
+    //   },
+    //   tooltip: {
+    //     callbacks: {
+    //       labelColor: (context : any) => ({ backgroundColor: context.dataset.borderColor } as TooltipLabelStyle)
+    //     }
+    //   }
+    // };
 
     const scales = this.getScales();
 
     const options: ChartOptions = {
       maintainAspectRatio: false,
-      plugins,
+      //plugins,
       scales,
       elements: {
         line: {
