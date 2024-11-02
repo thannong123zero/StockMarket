@@ -16,6 +16,10 @@ export const routes: Routes = [
     },
     children: [
       {
+        path: 'stock-market',
+        loadChildren: () => import('./candle-chart/routes').then((m) => m.routes)
+      },
+      {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes)
       },
