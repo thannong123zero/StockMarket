@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormBuilder, ReactiveFormsModule, UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 import { DocsExampleComponent } from '@docs-components/public-api';
 import { RowComponent, ColComponent, TextColorDirective, CardComponent, CardHeaderComponent, CardBodyComponent, ListGroupDirective, ListGroupItemDirective, BadgeComponent, FormDirective, FormCheckComponent, FormCheckInputDirective, FormCheckLabelDirective, ButtonDirective } from '@coreui/angular';
 
@@ -19,14 +19,21 @@ export class ListGroupsComponent {
   readonly breakpoints: (string | boolean)[] = [true, 'sm', 'md', 'lg', 'xl', 'xxl'];
   readonly colors: string[] = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
 
-
-  readonly checkBoxes = this.formBuilder.group({
-    one: false,
-    two: false,
-    three: true,
-    four: true,
-    five: { value: false, disabled: true }
+  public checkBoxes: UntypedFormGroup =  new UntypedFormGroup({
+    one : new UntypedFormControl(false),
+    two : new UntypedFormControl(false),
+    three : new UntypedFormControl(true),
+    four : new UntypedFormControl(true),
+    five : new UntypedFormControl({ value: false, disabled: true })
   });
+
+  // readonly checkBoxes = this.formBuilder.group({
+  //   one: false,
+  //   two: false,
+  //   three: true,
+  //   four: true,
+  //   five: { value: false, disabled: true }
+  // });
 
   readonly sampleList: string[] = [
     'Cras justo odio',

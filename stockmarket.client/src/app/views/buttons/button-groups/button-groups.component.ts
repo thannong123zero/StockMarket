@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { DocsExampleComponent } from '@docs-components/public-api';
 import { RowComponent, ColComponent, TextColorDirective, CardComponent, CardHeaderComponent, CardBodyComponent, ButtonGroupComponent, ButtonDirective, FormCheckLabelDirective, ButtonToolbarComponent, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ThemeDirective, DropdownComponent, DropdownToggleDirective, DropdownMenuDirective, DropdownItemDirective, DropdownDividerDirective } from '@coreui/angular';
@@ -13,11 +13,15 @@ import { RowComponent, ColComponent, TextColorDirective, CardComponent, CardHead
 })
 export class ButtonGroupsComponent {
 
-  formCheck1 = this.formBuilder.group({
-    checkbox1: false,
-    checkbox2: false,
-    checkbox3: false
+  public formCheck1: UntypedFormGroup = new UntypedFormGroup({
+    checkbox1: new UntypedFormControl(false),
+    checkbox2: new UntypedFormControl(false),
   });
+  // formCheck1 = this.formBuilder.group({
+  //   checkbox1: false,
+  //   checkbox2: false,
+  //   checkbox3: false
+  // });
   formRadio1 = new UntypedFormGroup({
     radio1: new UntypedFormControl('Radio1')
   });

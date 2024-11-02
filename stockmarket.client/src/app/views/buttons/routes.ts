@@ -19,13 +19,13 @@ export const routes: Routes = [
           title: 'Buttons'
         }
       },
-      // {
-      //   path: 'button-groups',
-      //   loadComponent: () => import('./button-groups/button-groups.component').then(m => m.ButtonGroupsComponent),
-      //   data: {
-      //     title: 'Button groups'
-      //   }
-      // },
+      {
+        path: 'button-groups',
+        loadComponent: () => import('./button-groups/button-groups.component').then(m => m.ButtonGroupsComponent),
+        data: {
+          title: 'Button groups'
+        }
+      },
       {
         path: 'dropdowns',
         loadComponent: () => import('./dropdowns/dropdowns.component').then(m => m.DropdownsComponent),
