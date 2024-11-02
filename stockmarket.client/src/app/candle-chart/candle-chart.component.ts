@@ -6,12 +6,14 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import { HttpClient } from '@angular/common/http';
 import { publishFacade } from '@angular/compiler';
 import { any } from '@amcharts/amcharts5/.internal/core/util/Array';
+import { CardBodyComponent, CardComponent } from '@coreui/angular';
 
 @Component({
   selector: 'app-candle-chart',
   templateUrl: './candle-chart.component.html',
   styleUrls: ['./candle-chart.component.scss'],
-  standalone: true
+  standalone: true,
+  imports: [CardBodyComponent,CardComponent]
 })
 export class CandleChartComponent implements OnInit, OnDestroy {
   private root!: am5.Root;
