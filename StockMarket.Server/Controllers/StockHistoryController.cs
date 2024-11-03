@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BusinessLogic.IHelper;
 using Microsoft.AspNetCore.Mvc;
-using StockMarket.Server._Convergence.BusinessLogic.Helper;
-using StockMarket.Server._Convergence.BusinessLogic.IHelper;
-using StockMarket.Server._Convergence.Services.FetchDataServiceAPIs;
-using StockMarket.Server.Models;
-using System;
+
 
 namespace StockMarket.Server.Controllers
 {

@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BusinessLogic.IHelper;
+using Common.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using StockMarket.Server._Convergence.BusinessLogic.IHelper;
-using StockMarket.Server.Models;
+
 
 namespace StockMarket.Server.Controllers
 {

@@ -1,6 +1,6 @@
+using Common.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using StockMarket.Server.Models;
+
 
 namespace StockMarket.Server.Controllers
 {
