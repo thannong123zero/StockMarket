@@ -1,6 +1,7 @@
+using DataAccess;
 using Microsoft.EntityFrameworkCore;
-using StockMarket.Server._Convergence.DataAccess;
-using StockMarket.Server._Convergence.Services;
+using StockMarket.Server;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
